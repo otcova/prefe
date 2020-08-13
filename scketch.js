@@ -5,7 +5,8 @@ let xiangScore = [
 
 let fantaScore = [
     { type: "gomet", score: 3 },
-    { type: "falta" }
+    { type: "falta" },
+    { type: "gomet", score: -1 }
 ];
 
 let contentLen = 0;
@@ -131,8 +132,9 @@ let notes = {
             nota.score > 0 ? { r: 180, g: 250, b: 180 } : { r: 255, g: 200, b: 200 }, y, w);
 
         stroke(0);
-        strokeWeight(1);
-        fill(60, 255, 10);
+        strokeWeight(2);
+        if (nota.score > 0) fill(60, 255, 10);
+        else fill(255, 10, 60);
         ellipse(w * 0.2, y + 50, 40);
 
         return nota.score;
