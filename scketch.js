@@ -1,6 +1,6 @@
 
 let xiangScore = [
-    { type: "star", score: 17 }
+    { type: "star", score: 7 }
 ];
 
 let fantaScore = [
