@@ -52,7 +52,7 @@ function draw() {
     noStroke();
     textSize(40);
     if (winer)
-        text(winer == "x"? "XiàngFeng" : "El otro", 0, 0, w, 100);
+        text(winer == "x"? "XiángFēng" : "El otro", 0, 0, w, 100);
     let xScore = notes.draw(xiangScore, 100);
     let y = drawTotal(xScore, w);
     if (contentLen < y) contentLen = y;
