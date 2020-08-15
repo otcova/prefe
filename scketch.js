@@ -1,17 +1,20 @@
 
 let xiangScore = [
-    { type: "star", score: 7 }
+    { type: "star", score: 7 },
+    { type: "res" }
 ];
 
 let fantaScore = [
     { type: "gomet", score: 3 },
     { type: "falta" },
-    { type: "gomet", score: -1 }
+    { type: "gomet", score: -1 },
+    { type: "gomet", score: 4 }
 ];
 
 let contentLen = 0;
 let scrollY = 0;
 let mMoved = false;
+let winer = undefined;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -21,20 +24,21 @@ function draw() {
     background(250, 20, 100);
 
     translate(0, scrollY);
-    if (mMoved) {
+    if (mMoved && contentLen > height - 190) {
         let wheel = 0;
         if (mouseY < 150) wheel = 150 - mouseY;
         else if (mouseY > height - 150) wheel = (height - 150) - mouseY;
         scrollY += wheel / 7;
         scrollY = min(0, max(height-300-contentLen, scrollY));
     }
+
     textAlign(CENTER, CENTER);
     textSize(50);
     stroke(0);
     strokeWeight(4);
     fill(255);
     text("¿QUI ÉS EL PREFE?", 0, 0, width, 150);
-
+    
     noStroke();
 
     let w = width / 2;
@@ -47,8 +51,10 @@ function draw() {
     fill(255);
     noStroke();
     textSize(40);
-    text("XiangFeng", 0, 0, w, 100);
-    let y = drawTotal(notes.draw(xiangScore, 100), w);
+    if (winer)
+        text(winer == "x"? "XiàngFeng" : "El otro", 0, 0, w, 100);
+    let xScore = notes.draw(xiangScore, 100);
+    let y = drawTotal(xScore, w);
     if (contentLen < y) contentLen = y;
 
     pop();
@@ -61,11 +67,16 @@ function draw() {
     fill(255);
     noStroke();
     textSize(40);
-    text("Fanta", 0, 0, w, 100);
-    y = drawTotal(notes.draw(fantaScore, 100), w);
+    if (winer)
+        text(winer == "f"? "Fantope" : "El otro", 0, 0, w, 100);
+    let fScore = notes.draw(fantaScore, 100);
+    y = drawTotal(fScore, w);
     if (contentLen < y) contentLen = y;
-
     pop();
+    
+    if (fScore.total == xScore.total) winer = "n";
+    else if (fScore.total < xScore.total) winer = "x";
+    else winer = "f";
 }
 
 document.oncontextmenu = function () {
@@ -114,7 +125,7 @@ let notes = {
         text(txt, w * 0.3, y + 50);
 
         textAlign(RIGHT, CENTER);
-        if (score > 0) text("+ " + score, w * 0.8, y + 50);
+        if (score >= 0) text("+ " + score, w * 0.8, y + 50);
         else text("- " + (-score), w * 0.8, y + 50);
     },
     star: function (nota, y, w) {
@@ -129,7 +140,7 @@ let notes = {
     gomet: function (nota, y, w) {
 
         this.plantilla("GOMET", nota.score,
-            nota.score > 0 ? { r: 180, g: 250, b: 180 } : { r: 255, g: 200, b: 200 }, y, w);
+            nota.score >= 0 ? { r: 180, g: 250, b: 180 } : { r: 255, g: 200, b: 200 }, y, w);
 
         stroke(0);
         strokeWeight(2);
@@ -142,6 +153,10 @@ let notes = {
     falta: function (nota, y, w) {
         this.plantilla("FALTA D'ASSISTÈNCIA", -5, { r: 255, g: 50, b: 0 }, y, w);
         return -5;
+    },
+    res: function (nota, y, w) {
+        this.plantilla("PUNTS DECISIUS", 0, { r: 210, g: 210, b: 210 }, y, w);
+        return 0;
     }
 };
 
