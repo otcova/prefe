@@ -156,7 +156,7 @@ let notes = {
         return -5;
     },
     res: function (nota, y, w) {
-        this.plantilla("PUNTS DECISIUS", 0, { r: 210, g: 210, b: 210 }, y, w);
+        this.plantilla("PUNTS DECISIUS", 0, { r: 250, g: 250, b: 250 }, y, w);
         return 0;
     }
 };
