@@ -9,7 +9,7 @@ let fantaScore = [
     { type: "falta" },
     { type: "gomet", score: -1 },
     { type: "gomet", score: 4 },
-    { type: "star", score: 5 }
+    { type: "star", score: 6 }
 ];
 
 let contentLen = 0;
