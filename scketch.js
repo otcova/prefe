@@ -1,15 +1,15 @@
 
 let xiangScore = [
-    { type: "star", score: 5 },
-    { type: "res" }
+    { type: "res" },
+    { type: "star", score: 5 }
 ];
 
 let fantaScore = [
     { type: "gomet", score: 3 },
     { type: "falta" },
     { type: "gomet", score: -1 },
-    { type: "gomet", score: 4 },
-    { type: "star", score: 6 }
+    { type: "gomet", score: 3 },
+    { type: "star", score: 7 }
 ];
 
 let contentLen = 0;
