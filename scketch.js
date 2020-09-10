@@ -1,7 +1,8 @@
 
 let xiangScore = [
     { type: "res" },
-    { type: "star", score: 5 }
+    { type: "star", score: 5 },
+    { type: "bit8" }
 ];
 
 let fantaScore = [
@@ -158,6 +159,10 @@ let notes = {
     res: function (nota, y, w) {
         this.plantilla("PUNTS DECISIUS", 0, { r: 250, g: 250, b: 250 }, y, w);
         return 0;
+    },
+    bit8: function (nota, y, w) {
+        this.plantilla("8 - BIT", 0, { r: 250, g: 250, b: 250 }, y, w);
+        return 8;
     }
 };
 
